@@ -1,0 +1,7 @@
+YAML=app/apps-uploadimg.yaml
+BUILD_DIR=apps/uploadimg
+PROJECT=uploadimg
+TAG=kcxt/apps-uploadimg
+DEPLOYNAME=apps-uploadimg-deployment
+PACKAGE=app.tar.gz
+NAMESPACE=default

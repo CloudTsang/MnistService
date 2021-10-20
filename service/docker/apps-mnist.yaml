@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apps-mnist-deployment
+spec:
+  selector:
+    matchLabels:
+      name: apps-mnist
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: apps-mnist
+    spec:
+      containers:
+      - name: web-apps-mnist
+        image: IMAGE_URL
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+          - name: is_collecting_vert
+            value: "T"
+        volumeMounts:
+        - name: tmp-pvc
+          mountPath: /app/tmp
+          readOnly: false
+      volumes:
+        - name: tmp-pvc
+          hostPath:
+            path: /data/ocr/tmp
+      nodeSelector:
+        ai: "ocr"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apps-mnist
+  labels:
+    name: apps-mnist
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    name: apps-mnist

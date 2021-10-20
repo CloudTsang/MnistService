@@ -1,0 +1,7 @@
+YAML=app/apps-mnist.yaml
+BUILD_DIR=apps/mnist
+PROJECT=mnist
+TAG=kcxt/apps-mnist
+DEPLOYNAME=apps-mnist-deployment
+PACKAGE=app.tar.gz
+NAMESPACE=default

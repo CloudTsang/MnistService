@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apps-uploadimg-deployment
+spec:
+  selector:
+    matchLabels:
+      name: apps-uploadimg
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        name: apps-uploadimg
+    spec:
+      containers:
+      - name: web-apps-uploadimg
+        image: IMAGE_URL
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: is_collecting
+          value: "not2"
+        volumeMounts:
+        - name: tmp-pvc
+          mountPath: /app/tmp
+          readOnly: false
+      volumes:
+        - name: tmp-pvc
+          hostPath:
+            path: /data/ocr/tmp
+      nodeSelector:
+        ai: "ocr"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apps-uploadimg
+  labels:
+    name: apps-uploadimg
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    name: apps-uploadimg
