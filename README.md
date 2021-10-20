@@ -20,6 +20,9 @@
 
  - service   
  使用模型进行识别的服务，模型本身只能单个字的识别，但是这里的使用场景是小学生直接在屏幕上手写做题并且识别出完整结果，导致笔划分割成了很大的问题，连笔、5之类笔划可能完全分开的字符如何分割/组合一个字，一直没有很好的解决方案，在触摸屏上多少会更潦草一些，小学生的书写更是难以捉摸-_-||   
-最后采用的是拆分出更多的单笔划识别类型（ㄅつ丿㇏𠃍𠃌等），在根据位置进行初步的笔划分割后，如果识别置信度低，则进行单笔划识别，并且匹配笔划字典（dict.txt文件，可添加新的笔划模式），效果稍微变好了一些。
+最后采用的是拆分出更多的单笔划识别类型（ㄅつ丿㇏𠃍𠃌等），在根据位置进行初步的笔划分割后，如果识别置信度低，则进行单笔划识别，并且匹配笔划字典（dict.txt文件，可添加新的笔划模式），效果稍微变好了一些。   
+/mnist/verteq这个接口则是直接将整条竖式的书写笔迹识别成数据，只是一个尝试没有实际使用上。
+![图](https://raw.githubusercontent.com/CloudTsang/MnistService/main/service/screenshot1.png)
+![图](https://raw.githubusercontent.com/CloudTsang/MnistService/main/service/screenshot2.png)
 
 ![图](https://raw.githubusercontent.com/CloudTsang/MnistService/main/MnistDataGen/Screenshot.png)
